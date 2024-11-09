@@ -31,7 +31,16 @@ Alternatively, you may use any other virtual environment setup method you prefer
 - On **Windows**: `.\.venv\Scripts\activate`
 - On **macOS/Linux**: `source .venv/bin/activate`
 
-### Step 2: Running the Program
+### Step 2: Install Required Packages
+After activating the virtual environment, install the required packages by running:
+
+```bash
+pip install -r requirements.txt
+```
+This will install all necessary dependencies listed in `requirements.txt` for the
+project.
+
+### Step 3: Running the Program
 
 To start the main program, run the following command:
 
@@ -45,7 +54,7 @@ The start script will:
 
 **Note**: Ensure the ESP32 device is connected and accessible at the designated port (`COM6` by default).
 
-### Step 3: Testing New Code (Optional)
+### Step 4: Testing New Code (Optional)
 
 You can add experimental scripts to the `/tests` folder. To test a new file, follow these steps:
 
@@ -73,4 +82,4 @@ To run a test script located at `/tests/my_test_script.py`:
    source scripts/start
    ```
 
-**Note**: The script is written in bash, if you are on Windows you can download git bash for Windows to run the script
+**Note for Windows Users**: This script is written in Bash. To run it on Windows, you can use [Git Bash for Windows](https://git-scm.com/downloads/win), which provides a compatible environment for executing Bash scripts on a Windows system.
