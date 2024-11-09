@@ -10,6 +10,7 @@ or update to the structure would be appreciated!
 - `/utils` — Holds all stable, working modules and utilities. Contributors are encouraged to create and place new functionalities in this folder.
 - `.gitignore` — Lists files and folders to be excluded from version control.
 - `main.py` — Contains the main program logic.
+- `requirements.txt` - Contains dependency for running code.
 
 ## Getting Started
 
