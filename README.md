@@ -15,7 +15,7 @@ or update to the structure would be appreciated!
 
 ### Step 0: Connecting to ESP32
 
-If there are any problems in this step you could meet Daniella or ping me on Discord and I will work you
+If there are any problems in this step you could meet Daniella or ping me on Discord and I will walk you
 through setting this up!
 
 ### Step 1: Set Up the Virtual Environment
@@ -47,7 +47,7 @@ The start script will:
 
 ### Step 3: Testing New Code (Optional)
 
-You are welcome to add experimental scripts in the `/tests` folder. To test a new file, follow these steps:
+You can add experimental scripts to the `/tests` folder. To test a new file, follow these steps:
 
 1. Place the script in the `/tests` directory.
 2. Update the `scripts/start` script to replace `main.py` with the path to your test file.
@@ -73,4 +73,4 @@ To run a test script located at `/tests/my_test_script.py`:
    source scripts/start
    ```
 
-**Note**: The script is written in bash, if you are on windows you can download git bash for windows to run the script
+**Note**: The script is written in bash, if you are on Windows you can download git bash for Windows to run the script
