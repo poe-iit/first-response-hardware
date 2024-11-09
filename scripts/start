@@ -1,0 +1,9 @@
+#!/bin/bash
+# Get the directory of the currently executing script
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Update files on the ESP32
+source "$script_dir/update_files"
+
+# Run the app on the ESP32
+ampy --port COM6 run tests/test5.py

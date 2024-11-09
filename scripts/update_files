@@ -1,0 +1,15 @@
+#!/bin/bash
+# Check if 'utils' directory exists on the ESP32
+if ! ampy --port COM6 ls | grep -q "utils"; then
+  # Create the 'utils' directory on the ESP32 if it doesn't exist
+  ampy --port COM6 mkdir utils
+  echo "Created 'utils' directory."
+else
+  echo "'utils' directory already exists."
+fi
+
+# Upload modules to the ESP32
+if compgen -G "utils/*.py" > /dev/null; then
+  echo "Uploading utils folder..."
+  ampy --port COM6 put "utils" "utils"
+fi
