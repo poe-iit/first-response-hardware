@@ -1,8 +1,14 @@
 import socket
+import json
 
-def urlopen(url, data=None, method="GET"):
+def urlopen(url, data=None, method="GET", headers=None):
   if data is not None and method == "GET":
     method = "POST"
+
+  # Prepare data encoding if `data` is a dictionary
+  if isinstance(data, dict):
+    data = json.dumps(data).encode('utf-8')  # Convert dict to JSON string and encode as bytes
+
   try:
     proto, dummy, host, path = url.split("/", 3)
   except ValueError:
@@ -38,6 +44,13 @@ def urlopen(url, data=None, method="GET"):
     s.write(b" HTTP/1.0\r\nHost: ")
     s.write(host)
     s.write(b"\r\n")
+
+    if headers:
+      for k, v in headers.items():
+        s.write(k)
+        s.write(b": ")
+        s.write(v)
+        s.write(b"\r\n")
 
     if data:
       s.write(b"Content-Length: ")
