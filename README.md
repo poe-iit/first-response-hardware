@@ -55,7 +55,24 @@ The start script will:
 
 **Note**: Ensure the ESP32 device is connected and accessible at the designated port (`COM6` by default).
 
-### Step 4: Testing New Code (Optional)
+### Step 4: Uploading without Running (Optional)
+If you'd like to `upload` a file to the ESP32 without immediately running it, you
+can use the upload script. This allows you to start the uploaded file by
+pressing the EN button on the ESP32 or by reconnecting the USB to a power
+source. It also enables you to use a different serial monitor than the one
+provided with `ampy` for monitoring.
+
+To upload the file without running it:
+
+```bash
+source scripts/upload
+```
+The upload script will:
+
+- Update files on the ESP32
+- Upload `main.py` (or any specified file) to the ESP32 without executing it
+
+### Step 5: Testing New Code (Optional)
 
 You can add experimental scripts to the `/tests` folder. To test a new file, follow these steps:
 

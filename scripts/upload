@@ -5,9 +5,9 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Update files on the ESP32
 source "$script_dir/update_files"
 
-# Specify file to run
+# Specify file to upload
 # main_file="main.py"
-main_file="tests/test6.py"
+main_file="main.py"
 
-# Run the app on the ESP32
-ampy --port COM6 run "$main_file"
+# Upload file as main.py
+ampy --port COM6 put "$main_file" main.py
