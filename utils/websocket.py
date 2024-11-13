@@ -66,12 +66,25 @@ class Websocket():
 
       handshake = "\r\n".join(headers_list) + "\r\n\r\n"
 
-      print(handshake)
+      # print(handshake)
       self.s.write(handshake.encode())
-      print("Complete data received:", self.read())
+      # Read the response from the server
+      self.read()
+      # print("Complete data received:", self.read())
     except OSError:
       self.s.close()
       raise
+  
+  def initialize(self):
+    # self.send_ping()
+    # self.send_pong()
+    message = {
+      "type": "connection_init"
+    }
+    message = json.dumps(message).encode("utf-8")
+    self.send_message(message)
+    response = self.receive_message()
+    # print("Message from server:", response)
   
   def read(self):
     str = b""
@@ -152,7 +165,6 @@ class Websocket():
     
     # Extract the opcode
     opcode = fin_and_opcode & 0x0F
-    print(fin_and_opcode, opcode)
     if(opcode == 0x0):
       return None
     # 0x1 = Text frame, 0x2 = Binary frame, 0x9 = Ping, 0xA = Pong
