@@ -2,8 +2,7 @@ import socket
 import os
 import json
 import random
-from my_module.ubinascii import b2a_base64
-
+from utils.ubinascii import b2a_base64
 
 def generate_random_string(length=10):
   # Allowed characters: 0-9, A-Z, a-z
