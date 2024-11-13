@@ -37,7 +37,7 @@ try:
 
   query = """
     subscription{
-      floorUpdate(id: \"6722c0a3a23e67f4ede41bd8\"){
+      floorUpdate(id: \"672fed9525894388bcf9dff1\"){
         name
         nodes {
           id
