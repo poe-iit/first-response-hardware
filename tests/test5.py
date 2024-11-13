@@ -8,7 +8,7 @@ connect_to_wifi("IIT-IoT", "IPRO-POE-ESP-32-1")
 
 url = "wss://first-response-server-v2-0.onrender.com"
 headers = {
-  "Cookie": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzBhMGI1MzNhOTkwN2U2Nzg5ZjJjYTMiLCJyb2xlcyI6WyJ1c2VyIl0sImlhdCI6MTczMTA5MTI1MCwiZXhwIjoxNzMxMzUwNDUwfQ.HRFo30a8B4HlonPqDWNbOU28QEKIz0y97jp91tT13Aw; Path=/; Secure; HttpOnly; Expires=Fri, 15 Nov 2024 18:40:50 GMT;",
+  "Cookie": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzBhMGI1MzNhOTkwN2U2Nzg5ZjJjYTMiLCJyb2xlcyI6WyJ1c2VyIl0sImlhdCI6MTczMTE4MTYzOSwiZXhwIjoxNzMxNDQwODM5fQ._shv-ROe6y0G4tJscW2R8Q7bevg0eWaAXgoMjwZlHGk; Path=/; Secure; HttpOnly; Expires=Sat, 16 Nov 2024 19:47:19 GMT;",
 }
 subprotocols = ["graphql-transport-ws"]
 
