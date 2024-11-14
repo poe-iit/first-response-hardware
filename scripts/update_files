@@ -13,3 +13,9 @@ if compgen -G "utils/*.py" > /dev/null; then
   echo "Uploading utils folder..."
   ampy --port COM6 put "utils" "utils"
 fi
+
+# Upload .env file to the ESP32
+if [ -f ".env" ]; then
+  echo "Uploading .env file..."
+  ampy --port COM6 put ".env" ".env"
+fi
