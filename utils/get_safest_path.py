@@ -1,3 +1,8 @@
+# Currently tossing around two approaches in pathfinding - will discuss with
+# software more on it
+# First idea let's compromised nodes show a way out
+# The other uses the X light to show a node is compromised
+
 def abs(num):
   if num < 0:
     return -num
@@ -52,7 +57,7 @@ def get_safest_path(node_id, floorData):
 
   # return color and direction
   if nodes_map[node_id]["isExit"] and nodes_map[node_id]["state"] == "safe":
-    return (76, 175, 80), "all"
+    return "exit", "all"
   distance = float("inf")
   safest_node_id = None
   # Can't be a safe exit if it got here
@@ -62,16 +67,16 @@ def get_safest_path(node_id, floorData):
       distance = distances[node_id]
       safest_node_id = previous_nodes[node_id]
       if nodes_map[node_id]["state"] == "safe":
-        color = (2, 119, 189)
+        state = "safe"
       elif nodes_map[node_id]["state"] == "compromised":
-        color = (230, 57, 70)
+        state = "compromised"
   
   if distance == float("inf"):
     # Can't be safe if it got here
     if nodes_map[node_id]["state"] == "compromised":
-      color = (230, 57, 70)
+      state = "compromised"
     else:
-      color = (255, 136, 0)
+      state = "stuck"
     for exit_node_id in exit_node_ids:
       distances, previous_nodes = dijkstra(nodes_map, exit_node_id)
       if distance > distances[node_id]:
@@ -94,4 +99,4 @@ def get_safest_path(node_id, floorData):
           direction = "down"
   if direction is None:
     direction = "all"
-  return color, direction
+  return state, direction
