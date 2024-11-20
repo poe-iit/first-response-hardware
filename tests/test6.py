@@ -9,7 +9,7 @@ from utils.connect_wifi import connect_to_wifi
 from utils.websocket import Websocket
 from utils.get_safest_path import get_safest_path
 from utils.display_direction import display_direction
-from utils.get_floor_plan import get_floor_plan
+from utils.floor_plan import get_floor_plan
 
 # Constants that can be changed from Serial monitor
 # FLOOR_ID, NODE_ID, GAS_THRESHOLD, AIR_THRESHOLD
