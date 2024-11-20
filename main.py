@@ -135,8 +135,8 @@ def check_for_response():
       floor_plan = response.get("payload", {}).get("data", {}).get("floorUpdate")
 
 def detect_fire():
-  global node_id, updating_server, ws, fire_trigger_time, gas_threshold, gas_sensor
-  if gas_sensor.value() >= gas_threshold:
+  global node_id, updating_server, ws, fire_trigger_time, gas_threshold, gas_sensor, state
+  if state != "compromised" and gas_sensor.value() >= gas_threshold:
   # if not updating_server and time.ticks_ms() / 1_000 > fire_trigger_time:
     # If fire detected, close the websocket, set node on fire, and open the
     # websocket again
@@ -156,6 +156,7 @@ def detect_fire():
       }
     }
     ws.subscribe(message)
+    state = "compromised"
 
 
 def blink_cross(color):
