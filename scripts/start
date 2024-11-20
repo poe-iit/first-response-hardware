@@ -6,8 +6,8 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$script_dir/update_files"
 
 # Specify file to run
-# main_file="main.py"
-main_file="tests/test6.py"
+main_file="main.py"
+# main_file="tests/audio.py"
 
 # Run the app on the ESP32
 ampy --port COM6 run "$main_file"
