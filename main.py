@@ -1,6 +1,4 @@
 import json
-import math
-import gc
 import _thread
 import time
 from machine import Pin
@@ -63,8 +61,6 @@ print("Getting floor plan...")
 response = get_floor_plan(floor_id, headers)
 
 def on_message():
-  help(gc)
-  print(gc.collect())
   global state, detected_fire, floor_plan, floor_name, node_name
   if "name" in floor_plan:
     floor_name = floor_plan.get("name")
@@ -233,7 +229,7 @@ def create_thread():
 
 event_loop.create_task(on_message)
 event_loop.create_task(check_for_response)
-event_loop.add_task(create_thread)
+# event_loop.add_task(create_thread)
 event_loop.create_task(detect_fire)
 # event_loop.add_task(blink_cross, (255, 0, 0))
 # event_loop.add_task(alarm_task, 2200, 0.12, audio_volume)
