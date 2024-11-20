@@ -1,4 +1,4 @@
-from machine import Pin, PWM, Timer
+from machine import Pin, ADC, PWM, Timer
 from time import sleep
 import neopixel
 import math
@@ -12,9 +12,9 @@ DIRS = [NORTH, SOUTH, EAST, WEST]
 # Hardware-Based Constants
 
 # Pin Numbers on hardware
-audioPinNumber = 15
-dirLEDPinNumber = 5
-crossLEDPinNumber = 4
+audioPinNumber = 33
+dirLEDPinNumber = 14
+crossLEDPinNumber = 27
 
 audio_pin = PWM(Pin(audioPinNumber))
 dirPin = Pin(dirLEDPinNumber)
@@ -68,11 +68,14 @@ def generateCross(np, color):
     np.fill(color)
     np.write()
     
+def generateCrossDriver(color):
+    generateCross(crossNeo, color)
+    
 def crossBlinking():
     for i in range(4):
-        clearNP(crossNeo)
         generateCross(crossNeo, crossColor)
         playAlarm(2200, 0.12, 4)
+        sleep(0.25)
         clearNP(crossNeo)
         sleep(1)
 
