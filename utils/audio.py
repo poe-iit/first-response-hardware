@@ -12,18 +12,61 @@ class Alarm:
     self.frequency = frequency
     self.duration = duration
     self.tone_volume = tone_volume
+    print("Alarm initialized")
   
   def play_tone(self):
     if self.frequency == 0:
       self.audio.duty_u16(0)
-      time.sleep(self.duration) #bug
-    self.audio.freq(self.frequency)
-    self.audio.duty_u16(int(self.tone_volume * 65535))  # 50% duty cycle
-    time.sleep(self.duration)
-    self.audio.duty_u16(0)
+    else:
+      self.audio.freq(self.frequency)
+      print("playing tone")
+      self.audio.duty_u16(int(self.tone_volume * 65535))  # 50% duty cycle
   
+  def stop_tone(self):
+    self.audio.duty_u16(0)
+
+  # Create a generator to play the alarm
+  """
+    Although I moved this function to a different thread, it still fights for
+    time with the cross blinking function
+
+    To prevent that, I tore the function apart and yielded at every moment where
+    this function does not need to run
+    A lot like how JavaScript event loops work
+
+    It's made the alarm/crossing tasks run in parallel and less janky to look at/hear
+  """
   def play_alarm(self, iterations):
-    for _ in range(iterations):
-      self.play_tone()
-      time.sleep(0.1)
+    playing = True
+    self.play_tone()
+    next_execution = (time.ticks_ms() / 1_000) + self.duration
+    print("Alarm started, for " + str(self.duration) + " seconds")
+    # Play the alarm, make sure not to stop until the alarm does
+    played_count = 1
+    while played_count < iterations:
+      current_time = time.ticks_ms() / 1_000
+      if current_time >= next_execution:
+        if playing:
+          print("Alarm stopped, waiting 0.1 seconds")
+          self.stop_tone()
+          playing = False
+          next_execution = (time.ticks_ms() / 1_000) + 0.1
+        else:
+          print("Alarm started, for " + str(self.duration) + " seconds")
+          self.play_tone()
+          playing = True
+          played_count += 1
+          next_execution = (time.ticks_ms() / 1_000) + self.duration
+      yield
+    
+    # If beep is still on
+    if playing:
+      current_time = time.ticks_ms() / 1_000
+      while current_time < next_execution:
+        current_time = time.ticks_ms() / 1_000
+        yield
+      print("Final Alarm stopped")
+      self.stop_tone()
+      playing = False
+      yield
 
