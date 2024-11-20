@@ -46,18 +46,20 @@ def get_safest_path(node_id, floorData):
   exit_node_ids = []
   distance = {}
   previous_node = {}
+  detected_fire = False
   for node in nodes:
     if node["isExit"] and node["state"] != "compromised":
       exit_node_ids.append(node["id"])
+    if node["state"] == "compromised":
+      detected_fire = True
     nodes_map[node["id"]] = node
     distance[node["id"]] = float("inf")
     previous_node[node["id"]] = None
-  
   # exit, or safe, or compromised or stuck
 
   # return color and direction
   if nodes_map[node_id]["isExit"] and nodes_map[node_id]["state"] == "safe":
-    return "exit", "all"
+    return "exit", "all", detected_fire
   distance = float("inf")
   safest_node_id = None
   # Can't be a safe exit if it got here
@@ -87,7 +89,17 @@ def get_safest_path(node_id, floorData):
     if connection["id"] == safest_node_id:
       node = nodes_map[node_id]
       safest_node = nodes_map[safest_node_id]
-      if connection["direction"] == "xy":
+      if abs(node["ui"]["x"] - safest_node["ui"]["x"]) < 10:
+        if node["ui"]["y"] > safest_node["ui"]["y"]:
+          direction = "up"
+        else:
+          direction = "down"
+      elif abs(node["ui"]["y"] - safest_node["ui"]["y"]) < 10:
+        if node["ui"]["x"] > safest_node["ui"]["x"]:
+          direction = "left"
+        else:
+          direction = "right"
+      elif connection["direction"] == "xy":
         if node["ui"]["x"] > safest_node["ui"]["x"]:
           direction = "left"
         else:
@@ -99,4 +111,4 @@ def get_safest_path(node_id, floorData):
           direction = "down"
   if direction is None:
     direction = "all"
-  return state, direction
+  return state, direction, detected_fire
