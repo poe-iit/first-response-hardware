@@ -13,6 +13,7 @@ class EventLoop:
         try:
           next(task)
         except StopIteration:
+          print("Task complete", task)
           self.queue.remove(task)
 
   def create_task(self, coro):
