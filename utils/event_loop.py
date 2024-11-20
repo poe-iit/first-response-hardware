@@ -19,3 +19,6 @@ class EventLoop:
     self.queue.append(
       self.wrap_task(coro)
     )
+  
+  def add_task(self, task, *args, **kwargs):
+    self.queue.append(task(*args, **kwargs))
