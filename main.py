@@ -126,7 +126,11 @@ def check_for_response():
   response = ws.receive_message()
   if response:
     print("Message recieved from socket")
-    response = json.loads(response)
+    try:
+      response = json.loads(response)
+    except:
+      print("Error decoding response", response)
+      response = {}
     if(response.get("payload", {}).get("data", {}).get("floorUpdate")):
       floor_plan = response.get("payload", {}).get("data", {}).get("floorUpdate")
 
@@ -234,5 +238,9 @@ event_loop.create_task(detect_fire)
 # event_loop.add_task(blink_cross, (255, 0, 0))
 # event_loop.add_task(alarm_task, 2200, 0.12, audio_volume)
 # What if I keep it in the thread?????
+try:
+  _thread.start_new_thread(alert_floor, ((255, 0, 0), 2200, 0.12, audio_volume))
+except Exception as e:
+  print(f"Error: {e}")
 
 event_loop.run_until_complete()
