@@ -27,43 +27,40 @@ def display_direction(direction, color):
   print(direction, color)
   if direction == "left":
     reset_strip(np_dir)
-    reset_strip(np_cross)
     update_strip(np_dir,0, color)
     update_strip(np_dir, 1, (0, 0, 0))
     update_strip(np_dir, 2, color)
     update_strip(np_dir, 3, (0, 0, 0))
   elif direction == "right":
     reset_strip(np_dir)
-    reset_strip(np_cross)
     update_strip(np_dir, 0, (0, 0, 0))
     update_strip(np_dir, 1, color)
     update_strip(np_dir, 2, (0, 0, 0))
     update_strip(np_dir, 3, color)
   elif direction == "up":
     reset_strip(np_dir)
-    reset_strip(np_cross)
     update_strip(np_dir, 0, (0, 0, 0))
     update_strip(np_dir, 1, color)
     update_strip(np_dir, 2, color)
     update_strip(np_dir, 3, (0, 0, 0))
   elif direction == "down":
     reset_strip(np_dir)
-    reset_strip(np_cross)
     update_strip(np_dir, 0, color)
     update_strip(np_dir, 1, (0, 0, 0))
     update_strip(np_dir, 2, (0, 0, 0))
     update_strip(np_dir, 3, color)
-  elif direction == "cross":
-    reset_strip(np_dir)
-    reset_strip(np_cross)
-    update_strip(np_cross, 0, color)
-    update_strip(np_cross, 1, color)
-    update_strip(np_cross, 2, color)
-    update_strip(np_cross, 3, color)
   else:
     reset_strip(np_dir)
-    reset_strip(np_cross)
     update_strip(np_dir, 0, color)
     update_strip(np_dir, 1, color)
     update_strip(np_dir, 2, color)
     update_strip(np_dir, 3, color)
+
+def reset_cross():
+  reset_strip(np_cross)
+
+def display_cross(color):
+  update_strip(np_cross, 0, color)
+  update_strip(np_cross, 1, color)
+  update_strip(np_cross, 2, color)
+  update_strip(np_cross, 3, color)
