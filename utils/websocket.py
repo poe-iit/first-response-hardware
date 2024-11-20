@@ -207,7 +207,7 @@ class Websocket():
     if masked:
       payload = bytearray([payload[i] ^ masking_key[i % 4] for i in range(payload_length)])
 
-    self.send_pong()
+    # self.send_pong()
     # Decode only if it's a text frame
     if opcode == 0x1:  # Text frame
       return payload.decode('utf-8')
@@ -221,6 +221,5 @@ class Websocket():
     message = json.dumps(json_message).encode("utf-8")
 
     self.send_message(message)
-    self.send_ping()
     self.send_pong()
   
