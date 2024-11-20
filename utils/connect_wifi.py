@@ -14,7 +14,7 @@ def connect_to_wifi(SSID = 'iPhone', PASSWORD = 'Tommy@234'):
   # Wait until connected
   print("Connecting to Wi-Fi...")
   while not wifi.isconnected():
-      time.sleep(1)
+    time.sleep(1)
 
   # Display the connection details
   print("Connected to Wi-Fi!")
